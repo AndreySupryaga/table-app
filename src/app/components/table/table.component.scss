@@ -13,6 +13,11 @@
   th {
     background-color: #934dd6;
     color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    &:last-child {
+      padding-right: 20px;
+    }
   }
   td {
     background-color: #fff;
@@ -23,14 +28,63 @@
   }
 }
 
-.text-left{
-  text-align: left;
+.th-element {
+  position: relative;
+  .chevron {
+    right: 8px;
+    position: absolute;
+    &::before {
+      display: none;
+    }
+  }
+  &.sort {
+    .chevron {
+      &::before {
+        display: inline-block;
+      }
+    }
+    &.desk {
+      .chevron {
+        &::before {
+          top: 0;
+          transform: rotate(135deg);
+        }
+      }
+    }
+  }
+
+}
+
+.text-left {
+  text-align: left !important;
 }
 
 .text-right {
-  text-align: right;
+  text-align: right !important;
 }
 
 .text-center {
-  text-align: center;
+  text-align: center !important;
+}
+
+.chevron::before {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.45em;
+  left: 0.15em;
+  position: relative;
+  top: 0.15em;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.45em;
+  &.right:before {
+    left: 0;
+    transform: rotate(45deg);
+  }
+  &.left:before {
+    left: 0.25em;
+    transform: rotate(-135deg);
+  }
 }

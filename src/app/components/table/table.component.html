@@ -2,10 +2,14 @@
   <table class="table">
     <thead>
     <tr>
-      <th class="text-left" (click)="sortDataBy('name')">Name</th>
-      <th class="text-center" (click)="sortDataBy('season')">Season</th>
-      <th class="text-center" (click)="sortDataBy('network')">Network</th>
-      <th class="text-right" (click)="sortByDate()">Premiere</th>
+      <th *ngFor="let option of columnOptions"
+          class="th-element {{option.className}} {{getHeadThClass(option.field)}}"
+          (click)="sortDataBy(option.field)">
+        <span class="th-content">
+          <span>{{option.name}}</span>
+          <span class="chevron"></span>
+        </span>
+      </th>
     </tr>
     </thead>
     <tbody>

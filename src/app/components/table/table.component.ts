@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as data from './data.json';
-import { IMovie } from '@app/interfaces/movie.interface';
+import { IMovie, ITableColumnOptions } from '@app/interfaces';
 import moment from 'moment';
 
 @Component({
@@ -12,6 +12,13 @@ export class TableComponent implements OnInit {
 
   public movies: IMovie[];
   private lastFilteredField: string;
+  private sortDeskOrAsk: string;
+  public columnOptions: ITableColumnOptions[] = [
+    {name: 'Name', field: 'name', className : 'text-left'},
+    {name: 'Season', field: 'season'},
+    {name: 'Network', field: 'network'},
+    {name: 'Premiere', field: 'premiere', className : 'text-right'},
+  ];
 
   constructor() {
   }
@@ -23,34 +30,33 @@ export class TableComponent implements OnInit {
   public sortDataBy(field: string) {
     if (this.lastFilteredField === field) {
       this.movies = this.movies.reverse();
+      this.sortDeskOrAsk = this.sortDeskOrAsk === 'ask' ? 'desk' : 'ask';
       return;
     }
     this.movies.sort((a: any, b: any) => {
-      if (a[field] < b[field]) {
+      const first = moment(a[field], 'DD.MM.YYYY').isValid() ?
+        moment(a[field], 'DD.MM.YYYY').valueOf() :
+        a[field];
+      const second = moment(b[field], 'DD.MM.YYYY').isValid() ?
+        moment(b[field], 'DD.MM.YYYY').valueOf() :
+        b[field];
+      if (first < second) {
         return -1;
-      } else if (a[field] > b[field]) {
+      } else if (first > second) {
         return 1;
       } else {
         return 0;
       }
     });
     this.lastFilteredField = field;
+    this.sortDeskOrAsk = 'ask';
+
   }
 
-  public sortByDate() {
-    if (this.lastFilteredField === 'premiere') {
-      this.movies = this.movies.reverse();
-      return;
+  public getHeadThClass(field: string) {
+    if (field === this.lastFilteredField) {
+      return `sort ${this.sortDeskOrAsk}`;
     }
-    this.movies.sort((a: any, b: any) => {
-      if (moment(a.premiere, 'DD.MM.YYYY').valueOf() < moment(b.premiere, 'DD.MM.YYYY').valueOf()) {
-        return -1;
-      } else if (moment(a.premiere, 'DD.MM.YYYY').valueOf() > moment(b.premiere, 'DD.MM.YYYY').valueOf()) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-    this.lastFilteredField = 'premiere';
+    return '';
   }
 }
