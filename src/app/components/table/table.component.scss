@@ -1,0 +1,36 @@
+.table-wrapper {
+  padding: 50px 0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  th,
+  td {
+    padding: .75rem;
+    vertical-align: top;
+  }
+  th {
+    background-color: #934dd6;
+    color: #ffffff;
+  }
+  td {
+    background-color: #fff;
+  }
+
+  thead th {
+    vertical-align: bottom;
+  }
+}
+
+.text-left{
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
