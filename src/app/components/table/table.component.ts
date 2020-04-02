@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as dataFromJson from './data.json';
-import { IMovie, ITableColumnOptions } from '@app/interfaces';
+import { IMovie, IPaginateOptions, ITableColumnOptions } from '@app/interfaces';
 import moment from 'moment';
 
 @Component({
@@ -20,7 +20,7 @@ export class TableComponent implements OnInit {
   public selectedGenre = '';
   public premiereYears: number[];
   public selectedYear = '';
-  public paginate = {
+  public paginateOptions: IPaginateOptions = {
     currentPage: 0,
     pageSize: 5,
   };
@@ -40,18 +40,6 @@ export class TableComponent implements OnInit {
     this.viewMovies = movies;
     this.genres = this.getGenres(movies);
     this.premiereYears = this.getPremiereYears(movies);
-  }
-
-  public setPage(pageNumber: number) {
-    this.paginate.currentPage = pageNumber;
-  }
-
-  public getArrayForPaginate(): [] {
-    if (this.viewMovies.length) {
-      const amountOfPages = Math.ceil(this.viewMovies.length / this.paginate.pageSize);
-      return Array.from(Array(amountOfPages).keys());
-    }
-    return [];
   }
 
   private getPremiereYears(movies: IMovie[]) {
@@ -78,6 +66,10 @@ export class TableComponent implements OnInit {
   }
 
   public filterMovies() {
+    this.paginateOptions = {
+      currentPage: 0,
+      pageSize: 5,
+    };
     let movies = this.copyArr(this.originMovies);
     if (this.selectedGenre) {
       movies = movies.filter(movie => {
@@ -95,10 +87,6 @@ export class TableComponent implements OnInit {
       });
     }
     this.viewMovies = movies;
-  }
-
-  private copyArr(arr) {
-    return JSON.parse(JSON.stringify(arr));
   }
 
   public sortDataBy(field: string) {
@@ -126,6 +114,10 @@ export class TableComponent implements OnInit {
     this.sortDeskOrAsk = 'ask';
   }
 
+  public setPaginateOptions(paginateOptions) {
+    this.paginateOptions = paginateOptions;
+  }
+
   private getDateMoment(date: string): moment.Moment {
     return moment(date, this.dateFormat);
   }
@@ -135,5 +127,9 @@ export class TableComponent implements OnInit {
       return `sort ${this.sortDeskOrAsk}`;
     }
     return '';
+  }
+
+  private copyArr(arr) {
+    return JSON.parse(JSON.stringify(arr));
   }
 }

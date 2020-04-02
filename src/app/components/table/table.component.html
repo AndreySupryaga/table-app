@@ -16,7 +16,6 @@
       </select>
     </div>
   </div>
-
   <div class="table-wrapper">
     <table class="table">
       <thead>
@@ -32,7 +31,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let movie of viewMovies | paginate : paginate.currentPage : paginate.pageSize">
+      <tr *ngFor="let movie of viewMovies | paginate : paginateOptions.currentPage : paginateOptions.pageSize">
         <td class="text-left">
           <span>{{movie.name}}</span> <br>
           <span>{{movie.genre}}</span>
@@ -44,37 +43,5 @@
       </tbody>
     </table>
   </div>
-
-  <div class="paginate-wrapper">
-    <div class="paginate-pages">
-      <ul *ngIf="viewMovies.length" class="pagination">
-        <li [ngClass]="{disabled: paginate.currentPage === 0}" class="page-arrow">
-          <a (click)="setPage(paginate.currentPage - 1)" class="chevron left"></a>
-        </li>
-        <li *ngFor="let page of getArrayForPaginate(); index as i"
-            [ngClass]="{active: paginate.currentPage === i}" class="number-item">
-          <a (click)="setPage(i)" class="page-link">{{i + 1}}</a>
-        </li>
-        <li [ngClass]="{disabled: paginate.currentPage === getArrayForPaginate().length - 1}" class="page-arrow">
-          <a (click)="setPage(paginate.currentPage + 1)" class="chevron right"></a>
-        </li>
-      </ul>
-    </div>
-    <div class="paginate-amount">
-      <ul>
-        <li>
-          <a (click)="paginate.pageSize = 5"
-             [ngClass]="{active: paginate.pageSize === 5}">5</a>
-        </li>
-        <li>
-          <a (click)="paginate.pageSize = 10"
-             [ngClass]="{active: paginate.pageSize === 10}">10</a>
-        </li>
-        <li>
-          <a (click)="paginate.pageSize = 25"
-             [ngClass]="{active: paginate.pageSize === 25}">25</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <app-paginate [itemLength]="viewMovies.length" (paginateOptionsEmit)="setPaginateOptions($event)"></app-paginate>
 </article>

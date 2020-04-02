@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableComponent } from './components/table/table.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
+import { PaginateComponent } from './components/paginate/paginate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    PaginatePipe
+    PaginatePipe,
+    PaginateComponent
   ],
   imports: [
     FormsModule,
