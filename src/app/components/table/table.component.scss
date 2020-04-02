@@ -1,3 +1,7 @@
+article {
+  padding: 50px 15px;
+}
+
 .table-wrapper {
   padding: 30px 0;
 }
@@ -67,18 +71,21 @@
   text-align: center !important;
 }
 
-.chevron::before {
-  border-style: solid;
-  border-width: 0.25em 0.25em 0 0;
-  content: '';
-  display: inline-block;
-  height: 0.45em;
-  left: 0.15em;
-  position: relative;
-  top: 0.15em;
-  transform: rotate(-45deg);
-  vertical-align: top;
-  width: 0.45em;
+.chevron {
+  &:before {
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    content: '';
+    display: inline-block;
+    height: 10px;
+    left: 0.15em;
+    position: relative;
+    top: 0.15em;
+    transform: rotate(-45deg);
+    vertical-align: top;
+    width: 10px;
+    cursor: pointer;
+  }
   &.right:before {
     left: 0;
     transform: rotate(45deg);
@@ -91,7 +98,6 @@
 
 .filter-wrapper {
   display: flex;
-  padding-top: 50px;
   .form-element {
     background-color: #f2994a;
 
@@ -110,9 +116,78 @@
       background-color: #f2994a;
       border: 0;
       height: 40px;
-      outline:none;
+      outline: none;
       font-size: 16px;
       padding: 0 10px;
     }
   }
 }
+
+.paginate-wrapper {
+  position: relative;
+  font-size: 14px;
+  .paginate-pages {
+    display: flex;
+    justify-content: center;
+    .pagination {
+      display: flex;
+      .page-arrow {
+        padding: 5px 10px 0;
+        a {
+          cursor: pointer;
+        }
+        &.disabled {
+          a {
+            pointer-events: none;
+            color: #ccc;
+          }
+        }
+      }
+      .number-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+        a {
+          display: flex;
+          width: 25px;
+          height: 25px;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          color: #4a4a4b;
+        }
+        &.active {
+          a {
+            border-radius: 100%;
+            background-color: #f2994a;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+  .paginate-amount {
+    position: absolute;
+    right: 0;
+    top: 0;
+    ul {
+      display: flex;
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
+        color: #4a4a4b;
+        &.active {
+          background-color: #f2994a;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+

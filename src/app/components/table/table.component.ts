@@ -20,7 +20,10 @@ export class TableComponent implements OnInit {
   public selectedGenre = '';
   public premiereYears: number[];
   public selectedYear = '';
-
+  public paginate = {
+    currentPage: 0,
+    pageSize: 5,
+  };
   public columnOptions: ITableColumnOptions[] = [
     {name: 'Name', field: 'name', className: 'text-left'},
     {name: 'Season', field: 'season'},
@@ -37,6 +40,18 @@ export class TableComponent implements OnInit {
     this.viewMovies = movies;
     this.genres = this.getGenres(movies);
     this.premiereYears = this.getPremiereYears(movies);
+  }
+
+  public setPage(pageNumber: number) {
+    this.paginate.currentPage = pageNumber;
+  }
+
+  public getArrayForPaginate(): [] {
+    if (this.viewMovies.length) {
+      const amountOfPages = Math.ceil(this.viewMovies.length / this.paginate.pageSize);
+      return Array.from(Array(amountOfPages).keys());
+    }
+    return [];
   }
 
   private getPremiereYears(movies: IMovie[]) {
