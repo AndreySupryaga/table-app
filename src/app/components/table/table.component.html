@@ -1,3 +1,22 @@
+
+<div class="filter-wrapper">
+  <div class="form-element form-input">
+    <input [(ngModel)]='searchValue' type="search"  placeholder="Name" (input)="filterMovies()">
+  </div>
+  <div class="form-element form-select">
+    <select name="genre" [(ngModel)]="selectedGenre" (change)="filterMovies()">
+      <option value="" selected>Genre</option>
+      <option *ngFor="let genre of genres" [value]="genre">{{genre}}</option>
+    </select>
+  </div>
+  <div class="form-element form-select">
+    <select [(ngModel)]="selectedYear" placeholder="Genre" (change)="filterMovies()">
+      <option value="" selected>Premiere Year</option>
+      <option *ngFor="let year of premiereYears" [value]="year">{{year}}</option>
+    </select>
+  </div>
+</div>
+
 <div class="table-wrapper">
   <table class="table">
     <thead>
@@ -13,8 +32,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let movie of movies">
-      <td class="text-left">{{movie.name}}</td>
+    <tr *ngFor="let movie of viewMovies">
+      <td class="text-left">
+        <span>{{movie.name}}</span> <br>
+        <span>{{movie.genre}}</span>
+      </td>
       <td class="text-center">{{movie.season}}</td>
       <td class="text-center">{{movie.network}}</td>
       <td class="text-right">{{movie.premiere}}</td>
