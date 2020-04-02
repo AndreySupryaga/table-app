@@ -12,7 +12,7 @@ article {
   th,
   td {
     padding: .75rem;
-    vertical-align: top;
+    vertical-align: middle;
   }
   th {
     background-color: #934dd6;
@@ -119,6 +119,33 @@ article {
       outline: none;
       font-size: 16px;
       padding: 0 10px;
+    }
+  }
+}
+
+.genre-list {
+  display: flex;
+  padding-top: 5px;
+  .genre {
+    font-size: 12px;
+    color: #ffffff;
+    padding: 3px 8px;
+    margin-right: 6px;
+    border-radius: 20px;
+    &.horror {
+      background-color: #4f4f4f;
+    }
+    &.drama {
+      background-color: #bb6bd9;
+    }
+    &.crime {
+      background-color: #9b51e0;
+    }
+    &.tragedy {
+      background-color: #eb5757;
+    }
+    &.comedy {
+      background-color: #828282;
     }
   }
 }

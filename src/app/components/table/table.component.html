@@ -33,8 +33,13 @@
       <tbody>
       <tr *ngFor="let movie of viewMovies | paginate : paginateOptions.currentPage : paginateOptions.pageSize">
         <td class="text-left">
-          <span>{{movie.name}}</span> <br>
-          <span>{{movie.genre}}</span>
+          <span>{{movie.name}}</span>
+          <div class="genre-list">
+            <!--TODO: Need create component for genre-->
+            <span *ngFor="let genre of movie.genre"
+                  class="genre {{genre}}">{{genre}}
+            </span>
+          </div>
         </td>
         <td class="text-center">{{movie.season}}</td>
         <td class="text-center">{{movie.network}}</td>
