@@ -45,6 +45,7 @@ export class PaginateComponent implements OnInit, OnChanges {
 
   public setPageSize(pageSize: number) {
     this.paginateOptions.pageSize = pageSize;
+    this.paginateOptions.currentPage = 0;
     this.paginateOptionsEmit.emit(this.paginateOptions);
   }
 

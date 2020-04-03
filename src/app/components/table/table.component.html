@@ -1,9 +1,11 @@
 <article>
+  <!--TODO: Need create filter component-->
   <div class="filter-wrapper">
     <div class="form-element form-input">
       <input [(ngModel)]='searchValue' type="search" placeholder="Name" (input)="filterMovies()">
     </div>
     <div class="form-element form-select">
+      <!--TODO: Need create select component for style customizing -->
       <select name="genre" [(ngModel)]="selectedGenre" (change)="filterMovies()">
         <option value="" selected>Genre</option>
         <option *ngFor="let genre of genres" [value]="genre">{{genre}}</option>

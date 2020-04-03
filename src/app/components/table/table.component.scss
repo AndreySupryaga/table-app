@@ -120,6 +120,9 @@ article {
       font-size: 16px;
       padding: 0 10px;
     }
+    input::placeholder {
+      color: #000;
+    }
   }
 }
 

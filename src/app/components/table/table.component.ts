@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as dataFromJson from './data.json';
+import dataFromJson from './data.json';
 import { IMovie, IPaginateOptions, ITableColumnOptions } from '@app/interfaces';
 import moment from 'moment';
 
@@ -35,7 +35,7 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    const movies = dataFromJson['default'];
+    const movies = dataFromJson;
     this.originMovies = movies;
     this.viewMovies = movies;
     this.genres = this.getGenres(movies);
