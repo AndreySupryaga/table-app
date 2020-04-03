@@ -1,5 +1,5 @@
 # Demo
-[Table app](https://github.com/AndreySupryaga/table-app)
+[Table app](https://andreysupryaga.github.io/table-app)
 
 ## Development server
 
