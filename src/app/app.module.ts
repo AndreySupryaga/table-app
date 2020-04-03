@@ -7,18 +7,20 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './components/table/table.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { PaginateComponent } from './components/paginate/paginate.component';
+import { SortPipe } from './pipes/sort.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     PaginatePipe,
-    PaginateComponent
+    PaginateComponent,
+    SortPipe,
   ],
   imports: [
     FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

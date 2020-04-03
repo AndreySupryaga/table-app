@@ -13,8 +13,8 @@ export class TableComponent implements OnInit {
   private dateFormat = 'DD.MM.YYYY';
   public viewMovies: IMovie[];
   public originMovies: IMovie[];
-  private lastFilteredField: string;
-  private sortDeskOrAsk: string;
+  private sortField: string;
+  private isSortReverse: boolean;
   public searchValue: string;
   public genres: string[];
   public selectedGenre = '';
@@ -90,28 +90,12 @@ export class TableComponent implements OnInit {
   }
 
   public sortDataBy(field: string) {
-    if (this.lastFilteredField === field) {
-      this.viewMovies = this.viewMovies.reverse();
-      this.sortDeskOrAsk = this.sortDeskOrAsk === 'ask' ? 'desk' : 'ask';
+    if (this.sortField === field) {
+      this.isSortReverse = !this.isSortReverse;
       return;
     }
-    this.viewMovies.sort((a: any, b: any) => {
-      const first = this.getDateMoment(a[field]).isValid() ?
-        this.getDateMoment(a[field]).valueOf() :
-        a[field];
-      const second = this.getDateMoment(b[field]).isValid() ?
-        this.getDateMoment(b[field]).valueOf() :
-        b[field];
-      if (first < second) {
-        return -1;
-      } else if (first > second) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-    this.lastFilteredField = field;
-    this.sortDeskOrAsk = 'ask';
+    this.sortField = field;
+    this.isSortReverse = false;
   }
 
   public setPaginateOptions(paginateOptions) {
@@ -123,8 +107,8 @@ export class TableComponent implements OnInit {
   }
 
   public getHeadThClass(field: string) {
-    if (field === this.lastFilteredField) {
-      return `sort ${this.sortDeskOrAsk}`;
+    if (field === this.sortField) {
+      return `sort ${this.isSortReverse ? 'desk' : 'ask'}`;
     }
     return '';
   }
@@ -132,4 +116,5 @@ export class TableComponent implements OnInit {
   private copyArr(arr) {
     return JSON.parse(JSON.stringify(arr));
   }
+
 }
